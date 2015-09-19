@@ -13,20 +13,13 @@ module Ruboty
 				@appid = appid
 			end
 
-			def get_geoloc(place)
-				params = {
-					:appid => @appid,
-					:query => place,
-					:output => "json",
-					:results => 1
-				}
+			def get_map(place)
+				loc = get_geoloc(place)
 
-				res = http_request("get", GEO_ENDPOINT, params)
+				if loc.nil?
+					return "Error."
+				end
 
-				loc =  JSON.parse(res.body)["Feature"][0]["Geometry"]["Coordinates"].split(",")
-			end
-
-			def get_map(loc)
 				params = {
 					:appid => @appid,
 					:lat => loc[1].to_f,
@@ -39,6 +32,28 @@ module Ruboty
 				query_string = build_query_string(params)
 
 				MAP_ENDPOINT + "?#{query_string}"
+			end
+
+			private
+
+			def get_geoloc(place)
+				params = {
+					:appid => @appid,
+					:query => place,
+					:output => "json",
+					:results => 1
+				}
+
+				res = http_request("get", GEO_ENDPOINT, params)
+				
+				begin
+					loc =  JSON.parse(res.body)["Feature"][0]["Geometry"]["Coordinates"].split(",")
+				rescue => ex
+					puts(ex.message)
+					loc = nil
+				end
+
+				loc
 			end
 
 			def http_request(method, uri, params = {})

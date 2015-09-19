@@ -12,8 +12,7 @@ module Ruboty
 
 			def amagumo(message)
 				amagumo = Ruboty::Amagumo::Client.new(ENV["YOLP_APP_ID"])
-				loc = amagumo.get_geoloc(message[:place])
-				url = amagumo.get_map(loc)
+				url = amagumo.get_map(message[:place])
 				message.reply(url)
 			end
 		end
