@@ -7,14 +7,14 @@ module Ruboty
 		class Client
 
 			MAP_ENDPOINT= "http://map.olp.yahooapis.jp/OpenLocalPlatform/V1/static"
-			GEO_ENDPOINT = "http://geo.search.olp.yahooapis.jp/OpenLocalPlatform/V1/geoCoder"
+			LOC_ENDPOINT = "http://search.olp.yahooapis.jp/OpenLocalPlatform/V1/localSearch"
 
 			def initialize(appid)
 				@appid = appid
 			end
 
 			def get_map(place)
-				loc = get_geoloc(place)
+				loc = get_loc(place)
 
 				if loc.nil?
 					return "Error."
@@ -36,7 +36,7 @@ module Ruboty
 
 			private
 
-			def get_geoloc(place)
+			def get_loc(place)
 				params = {
 					:appid => @appid,
 					:query => place,
@@ -44,8 +44,8 @@ module Ruboty
 					:results => 1
 				}
 
-				res = http_request("get", GEO_ENDPOINT, params)
-				
+				res = http_request("get", LOC_ENDPOINT, params)
+
 				begin
 					loc =  JSON.parse(res.body)["Feature"][0]["Geometry"]["Coordinates"].split(",")
 				rescue => ex
