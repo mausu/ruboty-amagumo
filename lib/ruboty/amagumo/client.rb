@@ -9,11 +9,13 @@ module Ruboty
 			MAP_ENDPOINT= "http://map.olp.yahooapis.jp/OpenLocalPlatform/V1/static"
 			GEO_ENDPOINT = "http://geo.search.olp.yahooapis.jp/OpenLocalPlatform/V1/geoCoder"
 
-			env :YOLP_APP_ID, "Your YOLP Application ID."
+			def initialize(appid)
+				@appid = appid
+			end
 
 			def get_geoloc(place)
 				params = {
-					:appid => ENV["YOLP_APP_ID"],
+					:appid => @appid,
 					:query => place,
 					:output => "json",
 					:results => 1
@@ -26,7 +28,7 @@ module Ruboty
 
 			def get_map(loc)
 				params = {
-					:appid => YOLP_APP_ID,
+					:appid => @appid,
 					:lat => loc[1].to_f,
 					:lon => loc[0].to_f,
 					:z => 12,
