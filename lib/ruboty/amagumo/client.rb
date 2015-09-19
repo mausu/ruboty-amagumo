@@ -7,7 +7,7 @@ module Ruboty
 		class Client
 
 			MAP_ENDPOINT= "http://map.olp.yahooapis.jp/OpenLocalPlatform/V1/static"
-			LOC_ENDPOINT = "http://search.olp.yahooapis.jp/OpenLocalPlatform/V1/localSearch"
+			GEO_ENDPOINT = "http://geo.search.olp.yahooapis.jp/OpenLocalPlatform/V1/geoCoder"
 
 			def initialize(appid)
 				@appid = appid
@@ -45,7 +45,7 @@ module Ruboty
 					:results => 1
 				}
 
-				res = http_request("get", LOC_ENDPOINT, params)
+				res = http_request("get", GEO_ENDPOINT, params)
 
 				begin
 					loc =  JSON.parse(res.body)["Feature"][0]["Geometry"]["Coordinates"].split(",")
