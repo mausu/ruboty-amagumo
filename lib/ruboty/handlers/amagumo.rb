@@ -8,7 +8,7 @@ module Ruboty
 			)
 
 			def amagumo(message)
-				amagumo = Ruboty::YOLP.Client.new
+				amagumo = Ruboty::Amagumo.Client.new
 				loc = amagumo.get_geoloc(message[:place])
 				url = amagumo.get_map(loc)
 				message.reply(url)

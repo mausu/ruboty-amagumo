@@ -3,18 +3,17 @@ require "uri"
 require "json"
 
 module Ruboty
-	module YOLP
+	module Amagumo
 		class Client
-			# env :YOLP_APP_ID, "your yolp application id."
 
 			MAP_ENDPOINT= "http://map.olp.yahooapis.jp/OpenLocalPlatform/V1/static"
 			GEO_ENDPOINT = "http://geo.search.olp.yahooapis.jp/OpenLocalPlatform/V1/geoCoder"
 
-			YOLP_APP_ID = "dj0zaiZpPVFKRTc3a25OWlhUYSZzPWNvbnN1bWVyc2VjcmV0Jng9NmI-"
+			env :YOLP_APP_ID, "Your YOLP Application ID."
 
 			def get_geoloc(place)
 				params = {
-					:appid => YOLP_APP_ID,
+					:appid => ENV["YOLP_APP_ID"],
 					:query => place,
 					:output => "json",
 					:results => 1

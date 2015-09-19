@@ -1,4 +1,4 @@
 require "ruboty"
-require "ruboty/Amagumo/client"
-require "ruboty/Amagumo/version"
+require "ruboty/amagumo/client"
+require "ruboty/amagumo/version"
 require "ruboty/handlers/amagumo"
