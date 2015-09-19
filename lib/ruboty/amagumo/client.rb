@@ -28,6 +28,7 @@ module Ruboty
 					:width => 800,
 					:height => 600,
 					:overlay => "type:rainfall"
+					:pointer => "on"
 				}
 				query_string = build_query_string(params)
 
